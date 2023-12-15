@@ -1,6 +1,9 @@
 export class Jugador {
 
     static XY_INI = [100, 100];
+    static gravedadY = 700;
+    static velX = 160;
+    static velSalto = 700;
 
     // ------------------------------------------------------------
     constructor(scene) {
@@ -13,7 +16,7 @@ export class Jugador {
 
         this.jugador.setCollideWorldBounds(true);
         this.jugador.setBounce(0.2);
-        this.jugador.body.setGravityY(300);
+        this.jugador.body.setGravityY(Jugador.gravedadY);
 
         this.relatedScene.anims.create({
             key: 'left',
@@ -44,12 +47,12 @@ export class Jugador {
 
         if (this.controles.left.isDown) {
             this.jugador.setFlipX(true);
-            this.jugador.setVelocityX(-160);
+            this.jugador.setVelocityX(-Jugador.velX);
             this.jugador.anims.play('left', true);
             
         } else if (this.controles.right.isDown) {
             this.jugador.setFlipX(false);
-            this.jugador.setVelocityX(160);
+            this.jugador.setVelocityX(Jugador.velX);
             this.jugador.anims.play('right', true);
             
         } else {
@@ -58,7 +61,7 @@ export class Jugador {
         }
         
         if (this.controles.up.isDown && this.jugador.body.touching.down) {
-            this.jugador.setVelocityY(-500);
+            this.jugador.setVelocityY(-Jugador.velSalto);
         }
     }
 
